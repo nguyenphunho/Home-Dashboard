@@ -216,8 +216,8 @@ function getVariableData() {
 
 
     if (account !== 'undefined') {
-        getReferralCommission();
-        getPoolPaymentReceived();
+        regLevelEvent();
+        getMoneyForLevelEvent();
 
    
     }
@@ -234,10 +234,17 @@ function getVariableData() {
 
 
 
-function getReferralCommission() {
+function regLevelEvent() {
     
 
-    var level1 = parseFloat(0.5); var level2 = parseFloat(0.05); var level3 = parseFloat(0.025); var level4 = parseFloat(0.0025);
+    var level1 = parseFloat(0.5); 
+  var pool2_price = 1.5;
+    var pool3_price = 4.5;
+    var pool4_price = 13.5;
+    var pool5_price = 40.5;
+    var pool6_price = 121.5;
+    var pool7_price = 364.5;
+    var pool8_price = 1093.5;
 
     var referraltotal = parseFloat(0);
 
@@ -251,19 +258,35 @@ function getReferralCommission() {
                     referraltotal = parseFloat(referraltotal) + parseFloat("0.5");
 
                 }
-                else if (level == 2) {
-
-                    referraltotal = parseFloat(referraltotal) + parseFloat("0.05");
-                }
-                else if (level == 3) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("0.025");
+              else if (level == 2) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("1.5");
 
                 }
-                else {
-
-                    referraltotal = parseFloat(referraltotal) + parseFloat("0.0025");
+              else if (level == 3) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("4.5");
 
                 }
+              else if (level == 4) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("13.5");
+
+                }
+              else if (level == 5) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("40.5");
+
+                }
+              else if (level == 6) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("121.5");
+
+                }
+              else if (level == 7) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("354.5");
+
+                }
+              else if (level == 8) {
+                    referraltotal = parseFloat(referraltotal) + parseFloat("1093.5");
+
+                }
+                
 
                 $('.totalreferral').html(Math.round(1000000 * (referraltotal)) / 1000000);
             });
@@ -453,7 +476,14 @@ function InDirectreferralCount(address, level) {
 function Transaction_Register() {
     
     var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter:{ _user: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-        var level1 = parseFloat(0.5); var level2 = parseFloat(0.05); var level3 = parseFloat(0.025); var level4 = parseFloat(0.0025);
+        var level1 = parseFloat(0.5); 
+      var pool2_price = 1.5;
+    var pool3_price = 4.5;
+    var pool4_price = 13.5;
+    var pool5_price = 40.5;
+    var pool6_price = 121.5;
+    var pool7_price = 364.5;
+    var pool8_price = 1093.5;
 
         if (!error) {
             $.each(log, function (key, value) {
