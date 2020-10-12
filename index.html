@@ -183,20 +183,7 @@ function getVariableData() {
         $('.pool8_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool9currUserID().call().then(function (result) {
-       
-            $('.Pool9count').html(result);
-        $('.pool9_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.pool10currUserID().call().then(function (result) {
-        
-            $('.Pool10count').html(result);
-        $('.pool10_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-
-
+   
     myContractInstance.methods.currUserID().call().then(function (result) {
     
        
@@ -206,15 +193,15 @@ function getVariableData() {
 
     myContractInstance.methods.users(account).call().then(function (result1) {
         
-            $('.currentuseridlink').html("https://oneid10.github.io/signup/?referralid=" + result1.id);
+            $('.currentuseridlink').html("https://nguyenphunho.github.io/signup/?referralid=" + result1.id);
 
-            $('.currentuseridlinknew').html("https://link.trustwallet.com/open_url?coin_id=60&url=https://nguyenphunho.github.io/?referralid=" + result1.id);
+            $('.currentuseridlinknew').html("https://token.im//open_url?coin_id=60&url=https://nguyenphunho.github.io/?referralid=" + result1.id);
 
 
 
             $('.currentuseridlink').val("https://oneid10.github.io/signup/?referralid=" + result1.id);
 
-            $('.currentuseridlinknew').val("https://link.trustwallet.com/open_url?coin_id=60&url=https://nguyenphunho.github.io/signup/?referralid=" + result1.id);
+            $('.currentuseridlinknew').val("https://token.im//open_url?coin_id=60&url=https://nguyenphunho.github.io/signup/?referralid=" + result1.id);
 
 
 
@@ -250,7 +237,7 @@ function getVariableData() {
 function getReferralCommission() {
     
 
-    var level1 = parseFloat(0.1); var level2 = parseFloat(0.05); var level3 = parseFloat(0.025); var level4 = parseFloat(0.0025);
+    var level1 = parseFloat(0.5); var level2 = parseFloat(0.05); var level3 = parseFloat(0.025); var level4 = parseFloat(0.0025);
 
     var referraltotal = parseFloat(0);
 
@@ -261,7 +248,7 @@ function getReferralCommission() {
                 var level = value.returnValues._level;
 
                 if (level == 1) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("0.1");
+                    referraltotal = parseFloat(referraltotal) + parseFloat("0.5");
 
                 }
                 else if (level == 2) {
@@ -278,7 +265,7 @@ function getReferralCommission() {
 
                 }
 
-                $('.totalreferral').html(Math.round(500000 * (referraltotal)) / 500000);
+                $('.totalreferral').html(Math.round(1000000 * (referraltotal)) / 1000000);
             });
            
         }
@@ -333,7 +320,7 @@ function getPoolPaymentReceived() {
                 
 
 
-                $('.totalpoolpayment').html(Math.round(500000 * (referraltotal)) / 500000);
+                $('.totalpoolpayment').html(Math.round(1000000 * (referraltotal)) / 1000000);
             });
         }
     });
@@ -466,7 +453,7 @@ function InDirectreferralCount(address, level) {
 function Transaction_Register() {
     
     var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter:{ _user: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-        var level1 = parseFloat(0.1); var level2 = parseFloat(0.05); var level3 = parseFloat(0.025); var level4 = parseFloat(0.0025);
+        var level1 = parseFloat(0.5); var level2 = parseFloat(0.05); var level3 = parseFloat(0.025); var level4 = parseFloat(0.0025);
 
         if (!error) {
             $.each(log, function (key, value) {
@@ -1686,7 +1673,7 @@ $(document).ready(function () {
         $('.logoutuser').click(function () {
         
             var account = localStorage.removeItem("address", null);
-            location.href = "https://.github.io/signin";
+            location.href = "https://nguyenphunho.github.io/signin";
         });
     });
     </script>
