@@ -477,8 +477,8 @@ function InDirectreferralCount(address, level) {
 function Transaction_Register() {
     
     var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter:{ _user: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-        var level1 = parseFloat(0.5); 
-        var pool2_price = 1.5;
+    var level1 = parseFloat(0.5); 
+    var pool2_price = 1.5;
     var pool3_price = 4.5;
     var pool4_price = 13.5;
     var pool5_price = 40.5;
@@ -498,7 +498,7 @@ function Transaction_Register() {
 
 function Transaction_Pool() {
     var events = myContractInstance.getPastEvents('getPoolPayment', {filter:{ _receiver: account },  'fromBlock': 0, 'toBlock': 'latest' }, function (error, log) {
-        var pool1_price = 0.5;
+    var pool1_price = 0.5;
     var pool2_price = 1.5;
     var pool3_price = 4.5;
     var pool4_price = 13.5;
@@ -594,33 +594,33 @@ function checkbuyLevel() {
 
 }
 
-function checklevel1() {
+function checkPool1() {
 
 
 
-    myContractInstance.methods.level1users(account).call().then(function (result) {
+    myContractInstance.methods.pool1users(account).call().then(function (result) {
         if(result[1] > 0){
-        $('#level1sequencue').text(result[1])
-        $('#level1sequencue').show();
-        $('.level1sequencue').show();}
+        $('#pool1sequencue').text(result[1])
+        $('#pool1sequencue').show();
+        $('.pool1sequencue').show();}
        
             if (!result[0]) {
-                $('.level1pay').show();
-                $('.level1transaction').hide();
+                $('.pool1pay').show();
+                $('.pool1transaction').hide();
             }
             else if (result[2] == 2) {
-                $('.level1status').show();
-                $('.level1status .card-status').addClass('bg-success');
-                $('.level1status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.level1transaction').html('Received No. of Payments ' + result[2]);
+                $('.pool1status').show();
+                $('.pool1status .card-status').addClass('bg-success');
+                $('.pool1status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
+                $('.pool1transaction').html('Received No. of Payments ' + result[2]);
 
 
             }
             else if (result[2]< 2) {
-                $('.level1status').show();
-                $('.level1status .card-status').addClass('bg-warning');
-                $('.level1status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.level1transaction').html('Received No. of Payments ' + result[2]);
+                $('.pool1status').show();
+                $('.pool1status .card-status').addClass('bg-warning');
+                $('.pool1status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
+                $('.pool1transaction').html('Received No. of Payments ' + result[2]);
                 $('.currentautopoolno').html(1);
             }
 
@@ -683,7 +683,7 @@ function checkPool3() {
                 $('.pool3pay').show();
                 $('.pool3transaction').hide();
             }
-            else if (result[2] == 4) {
+            else if (result[2] == 3) {
                 $('.pool3status').show();
                 $('.pool3status .card-status').addClass('bg-success');
                 $('.pool3status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
@@ -691,7 +691,7 @@ function checkPool3() {
 
 
             }
-            else if (result[2] < 4) {
+            else if (result[2] < 3) {
                 $('.pool3status').show();
                 $('.pool3status .card-status').addClass('bg-warning');
                 $('.pool3status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
@@ -717,7 +717,7 @@ function checkPool4() {
                 $('.pool4pay').show();
                 $('.pool4transaction').hide();
             }
-            else if (result[2] == 5) {
+            else if (result[2] == 3) {
                 $('.pool4status').show();
                 $('.pool4status .card-status').addClass('bg-success');
                 $('.pool4status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
@@ -725,7 +725,7 @@ function checkPool4() {
 
 
             }
-            else if (result[2] < 5) {
+            else if (result[2] < 3) {
                 $('.pool4status').show();
                 $('.pool4status .card-status').addClass('bg-warning');
                 $('.pool4status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
@@ -749,7 +749,7 @@ function checkPool5() {
                 $('.pool5pay').show();
                 $('.pool5transaction').hide();
             }
-            else if (result[2] == 6) {
+            else if (result[2] == 3) {
                 $('.pool5status').show();
                 $('.pool5status .card-status').addClass('bg-success');
                 $('.pool5status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
@@ -757,7 +757,7 @@ function checkPool5() {
 
 
             }
-            else if (result[2] < 6) {
+            else if (result[2] < 3) {
                 $('.pool5status').show();
                 $('.pool5status .card-status').addClass('bg-warning');
                 $('.pool5status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
@@ -782,7 +782,7 @@ function checkPool6() {
                 $('.pool6pay').show();
                 $('.pool6transaction').hide();
             }
-            else if (result[2] == 7) {
+            else if (result[2] == 3) {
                 $('.pool6status').show();
                 $('.pool6status .card-status').addClass('bg-success');
                 $('.pool6status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
@@ -790,7 +790,7 @@ function checkPool6() {
 
 
             }
-            else if (result[2] < 7) {
+            else if (result[2] < 3) {
                 $('.pool6status').show();
                 $('.pool6status .card-status').addClass('bg-warning');
                 $('.pool6status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
@@ -813,7 +813,7 @@ function checkPool7() {
                 $('.pool7pay').show();
                 $('.pool7transaction').hide();
             }
-            else if (result[2] == 8) {
+            else if (result[2] == 3) {
                 $('.pool7status').show();
                 $('.pool7status .card-status').addClass('bg-success');
                 $('.pool7status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
@@ -821,7 +821,7 @@ function checkPool7() {
 
 
             }
-            else if (result[2] < 8) {
+            else if (result[2] < 3) {
                 $('.pool7status').show();
                 $('.pool7status .card-status').addClass('bg-warning');
                 $('.pool7status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
@@ -847,7 +847,7 @@ function checkPool8() {
                 $('.pool8pay').show();
                 $('.pool8transaction').hide();
             }
-            else if (result[2] == 9) {
+            else if (result[2] == 3) {
                 $('.pool8status').show();
                 $('.pool8status .card-status').addClass('bg-success');
                 $('.pool8status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
@@ -855,7 +855,7 @@ function checkPool8() {
 
 
             }
-            else if (result[2] < 9) {
+            else if (result[2] < 3) {
                 $('.pool8status').show();
                 $('.pool8status .card-status').addClass('bg-warning');
                 $('.pool8status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
@@ -871,24 +871,7 @@ function checkPool8() {
 
 
 $(document).ready(function () {
-    $('.pool1pay').click(function (demo) {
-       
-        try {
-
-            ethereum.enable();
-            myContractInstance1.methods.buyPool1().send({ from: account, value: 500000000000000000, gas: 250000 })
-                .on('transactionHash', function (hash) {
-                    console.log('------->',hash)
-                    $('.pool1pay').hide();
-                    $('.pool1transaction').show();
-                    $('.pool1transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-              
-            });
-        }
-        catch (err) {
-            console.log(err)
-        }
-    });
+    
 
 
     $('.pool2pay').click(function () {
@@ -896,7 +879,7 @@ $(document).ready(function () {
             ethereum.enable();
           
 
-            myContractInstance1.methods.buyPool2().send({ from: account, value: 1500000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool2().send({ from: account, value: 1500000000000000000, gasprice: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool2pay').hide();
@@ -914,7 +897,7 @@ $(document).ready(function () {
         try {
             ethereum.enable();
 
-            myContractInstance1.methods.buyPool3().send({ from: account, value: 4500000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool3().send({ from: account, value: 4500000000000000000, gasprice: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool3pay').hide();
@@ -932,7 +915,7 @@ $(document).ready(function () {
         try {
             ethereum.enable();
             
-            myContractInstance1.methods.buyPool4().send({ from: account, value: 13500000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool4().send({ from: account, value: 13500000000000000000, gasprice: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool4pay').hide();
@@ -950,7 +933,7 @@ $(document).ready(function () {
         try {
             ethereum.enable();           
 
-            myContractInstance1.methods.buyPool5().send({ from: account, value: 40500000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool5().send({ from: account, value: 40500000000000000000, gasprice: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool5pay').hide();
@@ -969,7 +952,7 @@ $(document).ready(function () {
         try {
             ethereum.enable();
 
-            myContractInstance1.methods.buyPool6().send({ from: account, value: 12150000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool6().send({ from: account, value: 12150000000000000000, gasprice: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool6pay').hide();
@@ -988,7 +971,7 @@ $(document).ready(function () {
         try {
             ethereum.enable();
 
-            myContractInstance1.methods.buyPool7().send({ from: account, value: 364500000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool7().send({ from: account, value: 364500000000000000000, gasprice: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool7pay').hide();
@@ -1009,7 +992,7 @@ $(document).ready(function () {
         try {
             ethereum.enable();
 
-            myContractInstance1.methods.buyPool8().send({ from: account, value: 109350000000000000000, gas: 250000 })
+            myContractInstance1.methods.buyPool8().send({ from: account, value: 109350000000000000000, gas: 50 })
                 .on('transactionHash', function (hash) {
 
                     $('.pool8pay').hide();
