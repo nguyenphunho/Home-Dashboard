@@ -133,54 +133,55 @@
 var totalearned = 0;
 function getVariableData() {
     // get variable values
-    myContractInstance.methods.pool1currUserID().call().then(function (result) {
-        console.log('pool1users',result)
-        $('.Pool1count').html(result);
-        $('.pool1_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+    myContractInstance.methods.level1currUserID().call().then(function (result) {
+        console.log('level1users',result)
+        $('.level1count').html(result);
+        $('.level1_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool2currUserID().call().then(function (result) {
+    myContractInstance.methods.level2currUserID().call().then(function (result) {
         
-        $('.Pool2count').html(result);
-        $('.pool2_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+        $('.level2count').html(result);
+        $('.level2_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool3currUserID().call().then(function (result) {
+    myContractInstance.methods.level3currUserID().call().then(function (result) {
        
-            $('.Pool3count').html(result);
-        $('.pool3_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+            $('.level3count').html(result);
+        $('.level3_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool4currUserID().call().then(function (result) {
+    myContractInstance.methods.level4currUserID().call().then(function (result) {
        
-         $('.Pool4count').html(result);
-        $('.pool4_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result+ "</a>");
+         $('.level4count').html(result);
+        $('.level4_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result+ "</a>");
     });
 
 
 
-    myContractInstance.methods.pool5currUserID().call().then(function (result) {
+    myContractInstance.methods.level5currUserID().call().then(function (result) {
        
-            $('.Pool5count').html(result);
-        $('.pool5_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+            $('.level5count').html(result);
+            
+        $('.level5_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool6currUserID().call().then(function (result) {
+    myContractInstance.methods.level6currUserID().call().then(function (result) {
         
-            $('.Pool6count').html(result);
-        $('.pool6_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+            $('.level6count').html(result);
+        $('.level6_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool7currUserID().call().then(function (result) {
+    myContractInstance.methods.level7currUserID().call().then(function (result) {
       
-            $('.Pool7count').html(result);
-        $('.pool7_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+            $('.level7count').html(result);
+        $('.level7_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
-    myContractInstance.methods.pool8currUserID().call().then(function (result) {
+    myContractInstance.methods.level8currUserID().call().then(function (result) {
        
-            $('.Pool8count').html(result);
-        $('.pool8_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
+            $('.level8count').html(result);
+        $('.level8_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
     });
 
    
@@ -238,13 +239,13 @@ function regLevelEvent() {
     
 
     var level1 = parseFloat(0.5); 
-  var pool2_price = 1.5;
-    var pool3_price = 4.5;
-    var pool4_price = 13.5;
-    var pool5_price = 40.5;
-    var pool6_price = 121.5;
-    var pool7_price = 364.5;
-    var pool8_price = 1093.5;
+    var level2_price = 1.5;
+    var level3_price = 4.5;
+    var level4_price = 13.5;
+    var level5_price = 40.5;
+    var level6_price = 121.5;
+    var level7_price = 364.5;
+    var level8_price = 1093.5;
 
     var referraltotal = parseFloat(0);
 
@@ -297,48 +298,48 @@ function regLevelEvent() {
 }
 
 
-function getPoolPaymentReceived() {
-    var pool1_price = 0.5;
-    var pool2_price = 1.5;
-    var pool3_price = 4.5;
-    var pool4_price = 13.5;
-    var pool5_price = 40.5;
-    var pool6_price = 121.5;
-    var pool7_price = 364.5;
-    var pool8_price = 1093.5;
+function getMoneyForLevelEvent() {
+    var level1_price = 0.5;
+    var level2_price = 1.5;
+    var level3_price = 4.5;
+    var level4_price = 13.5;
+    var level5_price = 40.5;
+    var level6_price = 121.5;
+    var level7_price = 364.5;
+    var level8_price = 1093.5;
    
 
     var referraltotal = parseFloat(0);
 
-    var events = myContractInstance.getPastEvents('getPoolPayment', {filter : { _receiver: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
+    var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter : { _receiver: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
 
         if (!error) {
             $.each(log, function (key, value) {
                 var level = value.returnValues._level;
 
                 if (level == 1) {
-                    referraltotal = parseFloat(referraltotal) + pool1_price;
+                    referraltotal = parseFloat(referraltotal) + level1_price;
                 }
                 else if (level == 2) {
-                    referraltotal = parseFloat(referraltotal) + pool2_price;
+                    referraltotal = parseFloat(referraltotal) + level2_price;
                 }
                 else if (level == 3) {
-                    referraltotal = parseFloat(referraltotal) + pool3_price;
+                    referraltotal = parseFloat(referraltotal) + level3_price;
                 }
                 else if (level == 4) {
-                    referraltotal = parseFloat(referraltotal) + pool4_price;
+                    referraltotal = parseFloat(referraltotal) + level4_price;
                 }
                 else if (level == 5) {
-                    referraltotal = parseFloat(referraltotal) + pool5_price;
+                    referraltotal = parseFloat(referraltotal) + level5_price;
                 }
                 else if (level == 6) {
-                    referraltotal = parseFloat(referraltotal) + pool6_price;
+                    referraltotal = parseFloat(referraltotal) + level6_price;
                 }
                 else if (level == 7) {
-                    referraltotal = parseFloat(referraltotal) + pool7_price;
+                    referraltotal = parseFloat(referraltotal) + level7_price;
                 }
                 else if (level == 8) {
-                    referraltotal = parseFloat(referraltotal) + pool8_price;
+                    referraltotal = parseFloat(referraltotal) + level8_price;
                 }
                 
 
@@ -477,7 +478,7 @@ function Transaction_Register() {
     
     var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter:{ _user: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
         var level1 = parseFloat(0.5); 
-      var pool2_price = 1.5;
+        var pool2_price = 1.5;
     var pool3_price = 4.5;
     var pool4_price = 13.5;
     var pool5_price = 40.5;
@@ -577,14 +578,14 @@ function checkbuyLevel() {
      
        
             if (result[0]) {
-                checkPool1();
-                checkPool2();
-                checkPool3();
-                checkPool4();
-                checkPool5();
-                checkPool6();
-                checkPool7();
-                checkPool8();
+                checklevel1();
+                checklevel2();
+                checklevel3();
+                checklevel4();
+                checklevel5();
+                checklevel6();
+                checklevel7();
+                checklevel8();
                 
             }
        
@@ -593,33 +594,33 @@ function checkbuyLevel() {
 
 }
 
-function checkPool1() {
+function checklevel1() {
 
 
 
-    myContractInstance.methods.pool1users(account).call().then(function (result) {
+    myContractInstance.methods.level1users(account).call().then(function (result) {
         if(result[1] > 0){
-        $('#pool1sequencue').text(result[1])
-        $('#pool1sequencue').show();
-        $('.pool1sequencue').show();}
+        $('#level1sequencue').text(result[1])
+        $('#level1sequencue').show();
+        $('.level1sequencue').show();}
        
             if (!result[0]) {
-                $('.pool1pay').show();
-                $('.pool1transaction').hide();
+                $('.level1pay').show();
+                $('.level1transaction').hide();
             }
             else if (result[2] == 2) {
-                $('.pool1status').show();
-                $('.pool1status .card-status').addClass('bg-success');
-                $('.pool1status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool1transaction').html('Received No. of Payments ' + result[2]);
+                $('.level1status').show();
+                $('.level1status .card-status').addClass('bg-success');
+                $('.level1status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
+                $('.level1transaction').html('Received No. of Payments ' + result[2]);
 
 
             }
             else if (result[2]< 2) {
-                $('.pool1status').show();
-                $('.pool1status .card-status').addClass('bg-warning');
-                $('.pool1status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool1transaction').html('Received No. of Payments ' + result[2]);
+                $('.level1status').show();
+                $('.level1status .card-status').addClass('bg-warning');
+                $('.level1status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
+                $('.level1transaction').html('Received No. of Payments ' + result[2]);
                 $('.currentautopoolno').html(1);
             }
 
